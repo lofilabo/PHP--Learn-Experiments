@@ -1,0 +1,70 @@
+0. DATA
+
+There are 3 tables:
+
+i: table01
+	id	info
+	-------------------------
+	1	One
+	2	Two
+	3	Three
+	4	Four
+	5	Five
+	6	Six
+	7	Seven
+	8	Eight
+	9	Nine
+
+ii: join_01_02_1
+	one	two
+	------------
+	1	3
+	1	5
+
+iii: table03
+	id	info
+	-----------------------
+	1	Ichi
+	2	Ni
+	3	San
+	4	Shi
+	5	Go
+	6	Hichi
+	7	Hachi
+	8	Kyu
+	9	Jyuu
+
+1. Most basic
+
+SELECT * FROM table01 
+  INNER JOIN table02
+  ON table01.id = table02.id;
+
+
+
+2. Join to 'join in' table
+
+SELECT * FROM table01 t01
+  INNER JOIN join_01_02_1 j 
+  ON t01.id = j.one ;
+
+
+3.Join *3* tables!!
+
+ SELECT *
+  FROM table01
+  INNER JOIN join_01_02_1
+  ON table01.id = join_01_02_1.one 
+  INNER JOIN table02
+  ON join_01_02_1.two = table02.id;
+
+4. WHERE.....
+
+ SELECT *
+  FROM table01
+  INNER JOIN join_01_02_1
+  ON table01.id = join_01_02_1.one
+  INNER JOIN table02
+  ON join_01_02_1.two = table02.id
+  where table02.info = "Go"
+  ;
