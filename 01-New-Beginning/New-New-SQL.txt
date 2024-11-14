@@ -1,5 +1,8 @@
 0. DATA
 
+TOO MANY NOTES HERE??
+Flip to the bottom : "Finale" to see the shortest version.
+
 There are 3 tables:
 
 i: table01
@@ -21,7 +24,7 @@ ii: join_01_02_1
 	1	3
 	1	5
 
-iii: table03
+iii: table02
 	id	info
 	-----------------------
 	1	Ichi
@@ -33,6 +36,23 @@ iii: table03
 	7	Hachi
 	8	Kyu
 	9	Jyuu
+
+iv : table03
+	id	info
+	-----------------------
+	1	ONE--2---1
+	2	ONE--2---2
+	3	ONE--2---3
+
+v :  join_02_03_1
+	two	three
+	------------
+	1	1
+	1	2
+	3	3
+
+	//PAY ATTENTION to Line #2 here. 1 maps to 2.
+
 
 1. Most basic
 
@@ -68,3 +88,78 @@ SELECT * FROM table01 t01
   ON join_01_02_1.two = table02.id
   where table02.info = "Go"
   ;
+
+
+5: Join *4* tables!!!
+
+ SELECT *
+  FROM table01
+  INNER JOIN join_01_02_1
+  ON table01.id = join_01_02_1.one 
+  INNER JOIN table02
+  ON join_01_02_1.two = table02.id
+  INNER JOIN table03
+  ON join_01_02_1.two = table03.id;
+
+(same 'lookup' used here - join_01_02_1)
+
+6: Join *5* tables!!!
+
+-- To start, let's select *.  Named tables can come later.
+SELECT *
+  FROM table01
+  
+-- GROUP 1.  Join table01 and table02 using join_01_02_1
+-- NOTE (join_01_02_1.one) and then (join_01_02_1.two)
+  INNER JOIN join_01_02_1
+  ON table01.id = join_01_02_1.one 
+
+  INNER JOIN table02
+  ON join_01_02_1.two = table02.id
+
+-- GROUP 2.  Join table02 and table03 using join_02_03_1 
+-- NOTE (join_01_02_1.two) and then (join_01_02_1.three) 
+  INNER JOIN join_02_03_1
+  on table01.id = join_02_03_1.two 
+  
+  INNER JOIN table03
+  ON join_02_03_1.three = table03.id
+
+;
+-- End-mark ; on its own line
+
+6 - Notes ---
+This results in:
+
+id	info	one	two	id	info	two	three	id	into
+1	one	1	1	1	one-1	1	1	1	ONE--2---1
+1	one	1	1	1	one-1	1	2	2	TWO--2---2
+
+We have TWO lines of results bbecause of this section:
+
+two	three
+------------
+1	1
+1	2
+
+1 'two' leads to 2 'three's'.
+
+
+
+FINALE -- Same thing, but shorter.  No notes.
+
+
+SELECT table01.info,table02.info,table03.info  -- choice - cut-down
+-- SELECT *  -- choice - everything
+  FROM table01
+  INNER JOIN join_01_02_1
+  ON table01.id = join_01_02_1.one 
+  INNER JOIN table02
+  ON join_01_02_1.two = table02.id
+  INNER JOIN join_02_03_1
+  on table01.id = join_02_03_1.two 
+  INNER JOIN table03
+  ON join_02_03_1.three = table03.id;
+
+
+
