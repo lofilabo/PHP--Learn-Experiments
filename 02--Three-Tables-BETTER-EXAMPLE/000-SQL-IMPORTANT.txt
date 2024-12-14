@@ -1,0 +1,11 @@
+SELECT table01.info,table02.info,table03.info  -- choice - cut-down
+-- SELECT *  -- choice - everything
+  FROM table01
+  INNER JOIN join_01_02_1
+  ON table01.id = join_01_02_1.one 
+  INNER JOIN table02
+  ON join_01_02_1.two = table02.id
+  INNER JOIN join_02_03_1
+  on table01.id = join_02_03_1.two 
+  INNER JOIN table03
+  ON join_02_03_1.three = table03.id;
