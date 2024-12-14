@@ -1,0 +1,4 @@
+CREATE TABLE "table01" (
+	id INTEGER,
+	info TEXT
+)

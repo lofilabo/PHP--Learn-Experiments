@@ -1,0 +1,4 @@
+CREATE TABLE join_01_02_1 (
+	one INTEGER,
+	two INTEGER
+)
